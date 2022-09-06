@@ -14,76 +14,64 @@ import java.util.HashMap;
 
 public class order_price_hashmap {
     
-    TreeMap<Double, order_list> priceTree = new TreeMap<Double, order_list>();
-	HashMap<Double, order_list> priceMap = new HashMap<Double, order_list>();;
-	HashMap<Integer, order> orderMap = new HashMap<Integer, order>();
-	int volume;
-	int norders;
+        TreeMap<Double, order_list> price_tree = new TreeMap<Double, order_list>();
+	HashMap<Double, order_list> price_hashmap = new HashMap<Double, order_list>();
+        int volume;
+	int number_of_orders;
 	int depth;
-	
-	public order_price_hashmap() {
-		reset();
-	}
-	
-	public void reset() {
-		priceTree.clear();
-		priceMap.clear();
-		orderMap.clear();
-		volume = 0;
-		norders = 0;
-		depth = 0;
-	}
+        HashMap<Integer, order> order_hashmap = new HashMap<Integer, order>();
+
 	
 	public Integer length() {
-		return orderMap.size();
+		return order_hashmap.size();
 	}
 	
 	public order_list get_priceList(double price) {
 		/*
 		 * Returns the order_list object associated with 'price'
 		 */
-		return priceMap.get(price);
+		return price_hashmap.get(price);
 	}
 	
-	public order getorder(int id) {
+	public order get_order(int id) {
 		/*
 		 * Returns the order given the order id
 		 */
-		return orderMap.get(id);
+		return order_hashmap.get(id);
 	}
 	
 	public void createPrice(double price) {
 		depth += 1;
 		order_list newList = new order_list();
-		priceTree.put(price, newList);
-		priceMap.put(price, newList);
+		price_tree.put(price, newList);
+		price_hashmap.put(price, newList);
 	}
 	
-	public void removePrice(double price) {
+	public void remove_price(double price) {
 		depth -= 1;
-		priceTree.remove(price);
-		priceMap.remove(price);
+		price_tree.remove(price);
+		price_hashmap.remove(price);
 	}
 	
 	public boolean priceExists(double price) {
-		return priceMap.containsKey(price);
+		return price_hashmap.containsKey(price);
 	}
 	
 	public boolean orderExists(int id) {
-		return orderMap.containsKey(id);
+		return order_hashmap.containsKey(id);
 	}
 	
 	public void insertorder(order quote) {
 		int quoteID = quote.get_Id();
 		double quotePrice = quote.get_price();
 
-		norders += 1;
+		number_of_orders += 1;
 		if (!priceExists(quotePrice)) {
 			createPrice(quotePrice);
 		}
-		quote.setoL(priceMap.get(quotePrice));
-		priceMap.get(quotePrice).append_order(quote);
-		orderMap.put(quoteID, quote);
+		quote.setoL(price_hashmap.get(quotePrice));
+		price_hashmap.get(quotePrice).append_order(quote);
+		order_hashmap.put(quoteID, quote);
 		volume += quote.get_qtity();
 	}
 	
@@ -93,33 +81,33 @@ public class order_price_hashmap {
 
 	}
 	
-	public Double maxPrice() {
+	public Double max_price() {
 		if (this.depth>0) {
-			return this.priceTree.lastKey();
+			return this.price_tree.lastKey();
 		} else {
 			return null;
 		}
 	}
 	
-	public Double minPrice() {
+	public Double min_price() {
 		if (this.depth>0) {
-			return this.priceTree.firstKey();
+			return this.price_tree.firstKey();
 		} else {
 			return null;
 		}
 	}
 	
-	public order_list maxPriceList() {
+	public order_list max_price_list() {
 		if (this.depth>0) {
-			return this.get_priceList(maxPrice());
+			return this.get_priceList(max_price());
 		} else {
 			return null;
 		}
 	}
 	
-	public order_list minPriceList() {
+	public order_list min_price_list() {
 		if (this.depth>0) {
-			return this.get_priceList(minPrice());
+			return this.get_priceList(min_price());
 		} else {
 			return null;
 		}
@@ -127,13 +115,15 @@ public class order_price_hashmap {
 	
 	public String toString() {
 		String outString = "| The Book:\n" + 
-							"| Max price = " + maxPrice() +
-							"\n| Min price = " + minPrice() +
+							"| Max price = " + max_price
+() +
+							"\n| Min price = " + min_price
+() +
 							"\n| Volume in book = " + getVolume() +
 							"\n| Depth of book = " + getDepth() +
-							"\n| orders in book = " + getnorders() +
+							"\n| orders in book = " + getnumber_of_orders() +
 							"\n| Length of tree = " + length() + "\n";
-		for (Map.Entry<Double, order_list> entry : this.priceTree.entrySet()) {
+		for (Map.Entry<Double, order_list> entry : this.price_tree.entrySet()) {
 			outString += entry.getValue().toString();
 			outString += ("|\n");
 		}
@@ -144,8 +134,8 @@ public class order_price_hashmap {
 		return volume;
 	}
 
-	public Integer getnorders() {
-		return norders;
+	public Integer getnumber_of_orders() {
+		return number_of_orders;
 	}
 
 	public Integer getDepth() {
