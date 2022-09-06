@@ -22,21 +22,19 @@ public class orderlist implements Iterable<order>, Iterator<order>{
 	private order last = null;
 	
 	// The next three methods implement Iterator.
-	public boolean hasNext() {
-		if (this.last==null){
-			return false;
-	    }  
-	    return true;
+	public boolean has_next() {
+	    return (null != this.last);
 	}
 	
 	public order next() {
 	    if (this.last == null) {
 	    	throw new NoSuchElementException();
 	    }
-	    order returnVal = this.last;
+	    order return_val = this.last;
 	    this.last = this.last.get_next_order();
-	    return returnVal;
+	    return return_val;
 	}
+
 
 	public void remove() {
 		throw new UnsupportedOperationException();
@@ -48,7 +46,7 @@ public class orderlist implements Iterable<order>, Iterator<order>{
 		return this;
 	}
 	
-	public void appendOrder(order  incoming_order) {
+	public void append_order(order  incoming_order) {
 		if (length == 0) {
 			incoming_order.set_next_order(null);
 			incoming_order.set_prev_order(null);
@@ -86,7 +84,8 @@ public class orderlist implements Iterable<order>, Iterator<order>{
 	
 	public void move_tail(order  order) {
 		/*
-		 * Move 'order' to the tail of the list (after modification for e.g.)
+		 * Move 'order' to the tail of the list 
+                 * if Order modified
 		 */
 		if (order .get_prev_order() != null) {
 			order.get_prev_order().set_next_order(order.get_next_order());
@@ -111,7 +110,7 @@ public class orderlist implements Iterable<order>, Iterator<order>{
 	}
 	
 	
-	public Integer getLength() {
+	public Integer get_length() {
 		return length;
 	}
 
