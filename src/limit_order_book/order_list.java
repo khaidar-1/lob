@@ -1,3 +1,9 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+
 package limit_order_book;
 
  
@@ -10,14 +16,14 @@ package limit_order_book;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class orderlist implements Iterable<order>, Iterator<order>{
+public class order_list implements Iterable<order>, Iterator<order>{
 	/*
 	 * This class create a sorted, iterable list or orders for each price  level
 	 * in the order tree.
 	 */
 	private order head_order = null; // List tail pointer
 	private order tail_order = null; // List head pointer
-	private int length = 0;     // Order Queue
+	private int length = 0;     // order Queue
 	private int volume = 0;    // Total volume at this price level
 	private order last = null;
 	
@@ -49,21 +55,6 @@ public class orderlist implements Iterable<order>, Iterator<order>{
 		return this;
 	}
 	
-	public void append_order(order  incoming_order) {
-		if (length == 0) {
-			incoming_order.set_next_order(null);
-			incoming_order.set_prev_order(null);
-			head_order = incoming_order;
-			tail_order = incoming_order;
-		} else{
-			incoming_order.set_prev_order(tail_order);
-			incoming_order.set_next_order(null);
-			tail_order.set_next_order(incoming_order);
-			tail_order = incoming_order;
-		}
-		length+=1;
-		volume+=incoming_order.get_qtity();
-	}
 	
 	public void remove_order(order  order) {
 		this.volume -= order.get_qtity();
@@ -84,11 +75,27 @@ public class orderlist implements Iterable<order>, Iterator<order>{
 			this.tail_order = temp_prev_order;
 		}
 	}
+        
+        public void append_order(order  incoming_order) {
+		if (length == 0) {
+			incoming_order.set_next_order(null);
+			incoming_order.set_prev_order(null);
+			head_order = incoming_order;
+			tail_order = incoming_order;
+		} else{
+			incoming_order.set_prev_order(tail_order);
+			incoming_order.set_next_order(null);
+			tail_order.set_next_order(incoming_order);
+			tail_order = incoming_order;
+		}
+		length+=1;
+		volume+=incoming_order.get_qtity();
+	}
 	
 	public void move_tail(order  order) {
 		/*
 		 * Move 'order' to the tail of the list 
-                 * if Order modified
+                 * if order modified
 		 */
 		if (order .get_prev_order() != null) {
 			order.get_prev_order().set_next_order(order.get_next_order());
@@ -117,7 +124,7 @@ public class orderlist implements Iterable<order>, Iterator<order>{
 		return length;
 	}
 
-	public order getHeadOrder() {
+	public order getHeadorder() {
 		return head_order ;
 	}
 
@@ -138,3 +145,4 @@ public class orderlist implements Iterable<order>, Iterator<order>{
 	}
 	
 }
+

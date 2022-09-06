@@ -1,3 +1,12 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+
+
+
+
 package limit_order_book;
 
   
@@ -19,7 +28,7 @@ public class order
     private int Id;
     private order next_order; // Next order in the list
     private order prev_order; // Previous order
-    private orderlist order_list;
+    private order_list order_list;
 
     /**
      * order object that stores time, type of order, qutity
@@ -144,7 +153,7 @@ public class order
 	}
 
 
-	public orderlist get_order_list() {
+	public order_list get_order_list() {
 		return order_list;
 	}
 
@@ -153,7 +162,7 @@ public class order
 	}
 
 
-	public void setoL(orderlist order_list) {
+	public void setoL(order_list order_list) {
 		this.order_list= order_list;
 	}
 }
