@@ -15,14 +15,17 @@ public class orderlist implements Iterable<order>, Iterator<order>{
 	 * This class create a sorted, iterable list or orders for each price  level
 	 * in the order tree.
 	 */
-	private order head_order = null;
-	private order tail_order = null;
-	private int length = 0;
+	private order head_order = null; // List tail pointer
+	private order tail_order = null; // List head pointer
+	private int length = 0;     // Order Queue
 	private int volume = 0;    // Total volume at this price level
 	private order last = null;
 	
 	// The next three methods implement Iterator.
-	public boolean has_next() {
+
+
+        
+	public boolean hasNext() {
 	    return (null != this.last);
 	}
 	
@@ -40,7 +43,7 @@ public class orderlist implements Iterable<order>, Iterator<order>{
 		throw new UnsupportedOperationException();
 	}
 	  
-	// This method implements Iterable.
+	// This method implements Iterable. overrides parent class
 	public Iterator<order> iterator() {
 		this.last = head_order ;
 		return this;

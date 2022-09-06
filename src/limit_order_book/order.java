@@ -23,7 +23,11 @@ public class order
 
     /**
      * order object that stores time, type of order, qutity
-     * @param time
+     * @param time Time 
+     * @param is_limit is a limit order if true, market order if not
+     * @param target_qtity target quantity of order
+     * @param is_bid    Is bid or ask - bid if True !bid=ask
+     * @param Id        order OD
      */
     public order(int time, boolean is_limit, int target_qtity, int Id,boolean is_bid) 
     {
@@ -63,13 +67,20 @@ public class order
 	
 	public String toString() {
 	String trade="";
+        String limit_or_market="";
 	    if (is_bid){
 	     trade="bid";
         }else{
              trade="ask";
         }
         
-        return Integer.toString(target_qtity) + "\t@\t" + Double.toString(price) + trade +
+        if (is_limit){
+	     limit_or_market="limit order";
+        }else{
+             limit_or_market="market order";
+        }
+        
+        return Integer.toString(target_qtity) + "\t@\t" + Double.toString(price) + " " + trade + " "+ limit_or_market +
         		"\tt=" + Integer.toString(time) + 
         		"\ttId=" + Integer.toString(Id);
     }

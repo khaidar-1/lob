@@ -16,6 +16,9 @@ public class Limit_order_book {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
+        order x= new order(1,true,2,255,true);
+        System.out.println(x.toString());          
     }
     
 }
