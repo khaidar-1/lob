@@ -162,7 +162,7 @@ public class order
 	}
 
 
-	public void setoL(order_list order_list) {
+	public void set_oL(order_list order_list) {
 		this.order_list= order_list;
 	}
 }

@@ -53,6 +53,19 @@ public class order_price_hashmap {
 		price_hashmap.remove(price);
 	}
 	
+        public void removeOrderByID(int id) {
+        this.number_of_orders -=1;
+        order order = order_hashmap.get(id);
+        this.volume -= order.get_qtity();
+        order.get_order_list().remove_order(order);
+        if (order.get_order_list().get_length() == 0) {
+                this.remove_price(order.get_price());
+        }
+        this.order_hashmap.remove(id);
+	}
+        
+        
+        
 	public boolean priceExists(double price) {
 		return price_hashmap.containsKey(price);
 	}
@@ -69,7 +82,7 @@ public class order_price_hashmap {
 		if (!priceExists(quotePrice)) {
 			createPrice(quotePrice);
 		}
-		quote.setoL(price_hashmap.get(quotePrice));
+		quote.set_oL(price_hashmap.get(quotePrice));
 		price_hashmap.get(quotePrice).append_order(quote);
 		order_hashmap.put(quoteID, quote);
 		volume += quote.get_qtity();
@@ -128,6 +141,13 @@ public class order_price_hashmap {
 			outString += ("|\n");
 		}
 		return outString;
+	}
+        
+        public void updateOrderQty(int qty, int Id) {
+            order order = this.order_hashmap.get(Id);
+            int original_volume = order.get_qtity();
+            order.update_target_qtity(qty, order.get_timestamp());
+            this.volume += (order.get_qtity() - original_volume);
 	}
 
 	public Integer getVolume() {
