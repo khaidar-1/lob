@@ -11,8 +11,6 @@ package limit_order_book;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-// TODO for precision, change prices from double to java.math.BigDecimal
-
 public class order_book {
 	private order_price_hashmap bids = new order_price_hashmap();
 	private order_price_hashmap asks = new order_price_hashmap();
