@@ -54,14 +54,14 @@ public class order_price_hashmap {
 	}
 	
         public void removeOrderByID(int id) {
-        this.number_of_orders -=1;
-        order order = order_hashmap.get(id);
-        this.volume -= order.get_qtity();
-        order.get_order_list().remove_order(order);
-        if (order.get_order_list().get_length() == 0) {
-                this.remove_price(order.get_price());
-        }
-        this.order_hashmap.remove(id);
+		this.number_of_orders -=1;
+		order order = order_hashmap.get(id);
+		this.volume -= order.get_qtity();
+		order.get_order_list().remove_order(order);
+		if (order.get_order_list().get_length() == 0) {
+			this.remove_price(order.get_price());
+		}
+		this.order_hashmap.remove(id);
 	}
         
         
@@ -128,10 +128,8 @@ public class order_price_hashmap {
 	
 	public String toString() {
 		String outString = "| The Book:\n" + 
-							"| Max price = " + max_price
-() +
-							"\n| Min price = " + min_price
-() +
+							"| Max price = " + max_price() +
+							"\n| Min price = " + min_price() +
 							"\n| Volume in book = " + getVolume() +
 							"\n| Depth of book = " + getDepth() +
 							"\n| orders in book = " + getnumber_of_orders() +
